@@ -71,26 +71,6 @@ npm run dev
 
 Then open the URL printed in the terminal (usually `http://localhost:5173`).
 
-## Implementation Notes (for interview)
-
-- **TanStack Query**
-  - `useTodos(page)` lives in `src/hooks/useTodos.ts`
-  - Uses `queryKey: ["todos", page]` so each page is cached separately
-  - Handles loading (`isLoading`) and error (`isError`, `error`) states
-
-- **Pagination logic**
-  - The hook calls `https://jsonplaceholder.typicode.com/todos?_page=${page}&_limit=10`
-  - `TOTAL_PAGES` is set to `20` because the API exposes 200 todos total
-  - Pagination component receives `page`, `totalPages`, and `onPageChange`
-
-- **Toggle completed**
-  - For API todos, toggling is implemented with a `Set` of toggled ids so the UI can flip `completed` locally without mutating remote data
-  - For locally added todos, the `completed` flag is stored directly in local state
-
-- **Add new todo**
-  - New todos are created with a local `id` (using `Date.now()`) and an `isLocal` flag in the `Todo` type
-  - They are stored per-page so that they appear only on the page where they were created
-
 ## Deployment
 
 The app can be deployed to any static hosting that supports Vite builds, for example:
